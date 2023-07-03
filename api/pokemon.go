@@ -10,7 +10,7 @@ import (
 
 func (server *Server) getPokemons(ctx *gin.Context) {
 
-	pokemons, err := util.ReadCSVFile("./resources/pokemons.csv")
+	pokemons, err := util.ReadCSVDataWithWorkers("./resources/pokemons.csv", 10, 2)
 	if err != nil {
 
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
